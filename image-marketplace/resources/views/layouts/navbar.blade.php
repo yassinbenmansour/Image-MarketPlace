@@ -37,7 +37,7 @@
             </li>   
           @endguest
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{route('photos.create')}}">
               <i class="fas fa-upload"></i> Upload
             </a>
           </li>
@@ -73,10 +73,13 @@
           aria-labelledby="navbarDropdownMenuAvatar"
         >
           <li>
-            <a class="dropdown-item" href="#">My profile</a>
+            <a class="dropdown-item" href="#">{{auth()->user()->name}}</a>
           </li>
           <li>
-            <a class="dropdown-item" href="#">Logout</a>
+            <form id="formLogout" action="{{route('logout')}}" method="POST">
+            @csrf
+          </form>
+            <a class="dropdown-item" href="#" onclick="document.getElementById('formLogout').submit();">Logout</a>
           </li>
         </ul>
 

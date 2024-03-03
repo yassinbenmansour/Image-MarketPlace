@@ -8,9 +8,11 @@ use App\Models\Photo;
 
 class PhotoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index()
     {
         //
@@ -21,7 +23,8 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        //
+        return view('photos.user.upload');
+
     }
 
     /**
@@ -29,7 +32,7 @@ class PhotoController extends Controller
      */
     public function store(StorePhotoRequest $request)
     {
-        //
+        
     }
 
     /**

@@ -17,7 +17,15 @@
 
                         <div data-mdb-input-init class=" mb-4">
                             <label class="form-label" for="image">Photo <span style="color: red">*</span> </label>
-                            <input type="file" name="image" id="image" class="form-control" />
+                            <input type="file" name="image" id="image" class="form-control" onchange="readUrl(this,'imagePreview')" />
+                        </div>
+                        <div class="mt-2">
+                            <img src="#" alt=""
+                            id="imagePreview"
+                            class="d-none img-fluid  rounded mb-2"
+                            width="100"
+                            height="100"
+                            />
                         </div>
 
                         <div data-mdb-input-init class="form-outline mb-4">
@@ -34,7 +42,7 @@
                                         name="is_free" 
                                         id="free" 
                                         value="1" 
-                                        onchange="checkIfFree(true)" 
+                                        onchange="checkIsFree(1)" 
                                         checked />
                                     <label class="form-check-label" for="free">Free</label>
                                 </div>
@@ -44,7 +52,7 @@
                                         class="form-check-input" 
                                         name="is_free" 
                                         id="paid" 
-                                        onchange="checkIfFree(false)" 
+                                        onchange="checkIsFree(0)" 
                                         value="0" />
                                     <label class="form-check-label" for="paid">Paid</label>
                                 </div>
@@ -63,16 +71,31 @@
             </div>
         </div>
     </div>
+
+   
 @endsection
 
-@section('scripts')
-    <script>
-        function checkIfFree(isFree) {
-            if (isFree) {
-                document.getElementById('priceField').classList.remove('d-none');
-            } else {
-                document.getElementById('priceField').classList.add('d-none');
-            }
+<script>
+        
+    function checkIsFree(v) {
+         if (v) {
+             document.getElementById('priceField').classList.add('d-none');
+         } else {
+             document.getElementById('priceField').classList.remove('d-none');
+         }
+        //  console.log(v);
+     }
+
+     function readUrl(input, image) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById(image).classList.remove('d-none');
+            document.getElementById(image).setAttribute('src', e.target.result); // Fix the typo here
         }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+     
     </script>
-@endsection

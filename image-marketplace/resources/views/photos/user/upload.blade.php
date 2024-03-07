@@ -12,7 +12,9 @@
                     Upload
                 </div>                        
                 <div class="card-body">
-                    <form method="POST" action="{{ route('photos.store') }}">
+                    @include('layouts.alerts')
+
+                    <form method="POST" action="{{ route('photos.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div data-mdb-input-init class=" mb-4">

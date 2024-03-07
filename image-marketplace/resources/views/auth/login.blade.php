@@ -13,6 +13,8 @@
                         Login
                     </div>                        
                     <div class="card-body">
+                      @include('layouts.alerts')
+
                             <form method="POST" action="{{route('login')}}">
                                 @csrf
                         

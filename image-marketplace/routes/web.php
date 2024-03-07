@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,6 @@ Route::get('/', [PhotoController::class, 'index']);
 
 Route::resource('photos', PhotoController::class);
 
+Route::get('stripe/{photo}', [PaymentController::class,'index'])->name('stripe.form');
+
+Route::post('order/pay', [PaymentController::class,'pay']);

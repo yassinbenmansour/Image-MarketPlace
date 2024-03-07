@@ -32,7 +32,19 @@ class PhotoController extends Controller
      */
     public function store(StorePhotoRequest $request)
     {
-        
+        if($request->validated()){
+            $data = $request->all(); // recuperation data
+            $image = $request->file('image'); //recuperation image
+            $image_name = time().'_'.$image->getClientOriginalName(); // recuperation name image
+            $image->storeAs('images',$image_name,'public'); // stock to storage
+            $data['url']='/storage/images/'.$image_name;
+            $data['user_id']=auth()->user()->id;  // user connected
+            Photo::create($data);
+            return redirect('/')->with(
+                ["success"=>"Photo Upload Successfully"]
+            );
+
+        }
     }
 
     /**

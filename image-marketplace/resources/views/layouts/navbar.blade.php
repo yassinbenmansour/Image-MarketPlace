@@ -60,7 +60,7 @@
           aria-expanded="false"
         >
           <img
-            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+            src="{{auth()->user()->profile_image}}"
             class="rounded-circle"
             height="25"
             alt="Black and White Portrait of a Man"

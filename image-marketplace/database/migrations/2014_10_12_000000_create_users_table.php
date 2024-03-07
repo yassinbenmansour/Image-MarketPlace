@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('profile_image')->default('https://cdn-icons-png.flaticon.com/512/21/21104.png');
+            $table->string('profile_image')->default('https://mdbcdn.b-cdn.net/img/new/avatars/2.webp');
             $table->rememberToken();
             $table->timestamps();
         });

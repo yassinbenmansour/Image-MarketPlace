@@ -163,7 +163,7 @@
 @section('scripts')
     <script src="https://js.stripe.com/v3/"></script>
     <script>
-        const stripe = Stripe("YOUR PUBLISHABLE KEY");
+        const stripe = Stripe("pk_test_51NSt8IE72v05zDQbudInc9wrV1Ks9OiALH8w0hv7VVxSmmUZdAOhFmcDDsSO3vKoIQRLQju6gH8epiGt2XHosnmf00VQKQi70y");
         const items = [
             { amount: document.getElementById('total').value } 
         ];

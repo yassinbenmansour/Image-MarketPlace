@@ -23,3 +23,5 @@ Route::resource('photos', PhotoController::class);
 Route::get('stripe/{photo}', [PaymentController::class,'index'])->name('stripe.form');
 
 Route::post('order/pay', [PaymentController::class,'pay']);
+Route::get('pay/success', [PaymentController::class, 'success']);
+

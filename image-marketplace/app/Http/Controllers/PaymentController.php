@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use ErrorException;
 use App\Models\Photo;
-use Stripe\Stripe;
+use ErrorException;
 
 class PaymentController extends Controller
 {
@@ -16,18 +15,19 @@ class PaymentController extends Controller
         ]);
     }
 
+
     public function pay()
     {
-        try {
-            Stripe::setApiKey('sk_test_51NSt8IE72v05zDQbJNltILNwrjFF4dO9proZXVYkVGraoQKqdZ4ZJdEgmXP7Oioz7UjhL2ghRHngD15iS0grG1Va000JUDDaGc');
+        \Stripe\Stripe::setApiKey('sk_test_51NSt8IE72v05zDQb1q469LW4ls1GdCcf5sKiJMZmzN0qVRTzyu8QdpJXchxFNdVUxriMLAwWacbkuscnW72NcmOk00fsK2M0fK');
 
+        try {
             $jsonStr = file_get_contents('php://input');
             $jsonObj = json_decode($jsonStr);
 
             $paymentIntent = \Stripe\PaymentIntent::create([
                 'amount' => $this->calculateOrderAmount($jsonObj->items),
                 'currency' => 'usd',
-                'description' => 'Image ',
+                'description' => 'Laravel Images Stock',
                 'setup_future_usage' => 'on_session',
                 'metadata' => [
                     'user_id' => auth()->user()->id
@@ -54,12 +54,13 @@ class PaymentController extends Controller
         }
     }
 
-    public function success(Request $request)
-    {
-        // Handle successful payment here, for example, update the order status
-        $photoId = $request->input('photo_id');
-        // Perform additional actions, if necessary
-
-        return view('payments.success');
-    }
+    // public function success()
+    // {
+    //     $order = session()->get('order');
+    //     auth()->user()->orders()->create($order);
+    //     session()->remove('order');
+    //     return redirect()->route('photos.show', $order['photo_id'])->with([
+    //         'success' => 'Payment placed successfully'
+    //     ]);
+    // }
 }
